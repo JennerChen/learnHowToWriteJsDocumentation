@@ -1,0 +1,16 @@
+{
+  "name": "howtodoc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "./node_modules/.bin/jsdoc -c ./conf.json"
+  },
+  "author": "Qing",
+  "license": "ISC",
+  "devDependencies": {
+    "ink-docstrap": "^1.2.1",
+    "jsdoc": "^3.4.0"
+  }
+}
