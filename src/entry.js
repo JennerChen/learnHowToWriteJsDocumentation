@@ -1,9 +1,4 @@
 /**
- * @file Manages the configuration settings for the widget.
- * @author Rowina Sanela 
- */
-
-/**
  * Returns the sum of a and b
  * @param {Number} a
  * @param {Number} b
