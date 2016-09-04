@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "doc": "./node_modules/.bin/jsdoc -c ./conf.json"
+    "doc": "./node_modules/.bin/jsdoc -c ./conf.json --readme ./README.md --package ./package.json"
   },
   "author": "Qing",
   "license": "ISC",
   "devDependencies": {
+    "docdash": "^0.4.0",
     "ink-docstrap": "^1.2.1",
     "jsdoc": "^3.4.0"
   }
