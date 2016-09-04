@@ -46,3 +46,35 @@ instead of decimal-encoded entites like `&#8212;`.
 This is a normal paragraph:
 
     var a = new ChartApi() // 这是一行代码
+
+***
+
+## jsdoc 语法学习
+
+### @namespace 
+
+一般 namespace 用法. 	
+	/**
+	 * @namespace 
+	 */
+	var myUtils = {
+		/**
+		 * This function adds 2 to its input.
+		 * @public 
+		 * @param {number} input any number
+		 * @memberof myUtils
+		 * @returns {number} that number, plus 2.
+		 */
+		addOne: function(input) {
+			return input + 2;
+		},
+		/**
+		 * This function draw 
+		 * @public 
+		 * @memberof myUtils
+		 * @returns {number} that number, plus 2.
+		 */
+		draw: function() {
+			return input + 2;
+		}
+	}
