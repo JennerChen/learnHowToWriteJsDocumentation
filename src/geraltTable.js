@@ -322,8 +322,18 @@ var geraltTable = function(options) {
 		return page;
 	}();
 	/**
+	 * @typedef {Object} geraltTable#sort
+	 * @property { Function } sortBy -  sortBy, 更具传入参数, 进行排序. 		  		
+	 *                      	`@param {string } sortKey 按照哪个字段排序`				
+	 *                      	`@param {string } [scend = ASC] 排序方式, 默认 ASC`    
+	 *                      	`@example sort.sortBy("apple", "ASC")` 以apple字段升序进行重新排序		
+	 *                      			    
+	 */
+	/**
+	 * 排序api, 表格关于排序的api
 	 * @public
 	 * @name sort
+	 * @type geraltTable#sort
 	 * @memberof geraltTable.prototype
 	 */
 	api.sort = function() {
@@ -333,8 +343,15 @@ var geraltTable = function(options) {
 			console.log('under implementing ....');
 			return;
 		}
-		//noinspection JSUnusedLocalSymbols
-		sortApi.sortBy = function(sortKey, scend, callback) {
+		/**
+		 * sortBy, 更具传入参数, 进行排序
+		 * @public 
+		 * @function sortBy
+		 * @memberof geraltTable.prototype.sort
+		 * @param  { string }   sortKey  [description]
+		 * @param  { string }   scend    [description]
+		 */
+		sortApi.sortBy = function(sortKey, scend) {
 			if (!rowMap.hasOwnProperty(sortKey)) return;
 			if (!(scend === 'DESC' || scend === 'ASC')) {
 				scend = 'ASC';
@@ -350,6 +367,14 @@ var geraltTable = function(options) {
 		};
 		return sortApi;
 	}();
+	/**
+	 * 更具传入的 data，重新绘制新的table
+	 * @public
+	 * @name  draw
+	 * @function
+	 * @memberof geraltTable.prototype
+	 * @param  { Object[] } data 相当于 dataSource
+	 */
 	api.draw = function(data) {
 		draw(data);
 	};
