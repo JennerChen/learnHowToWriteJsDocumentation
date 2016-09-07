@@ -155,6 +155,21 @@ var geraltTable = function(options) {
 			}
 		}
 	}
+	/**
+	 * @typedef {Object} geraltTable#page
+	 * @property { Function } goPage -  goPage, 更具传入参数, 进行排序. 		  		
+	 *                      	`@param { int | string } [num = 1] 页码`				
+	 *                      	`@param { int } [p = 20] 默认20页`    
+	 *                      	
+	 * @property { boolean } [rebuildpager = true] 是否重新构建分页	    
+	 */
+	/**
+	 * 分页相关 api
+	 * @public
+	 * @name page
+	 * @type geraltTable#page
+	 * @memberof geraltTable.prototype
+	 */
 	api.page = function() {
 		// page api
 		var page = {};
@@ -196,7 +211,7 @@ var geraltTable = function(options) {
 					num = total;
 					break;
 				default:
-					num = parseInt(num);
+					num = parseInt(num) ? parseInt(num) : 1;
 					break;
 			}
 			if (dataRemote) {
@@ -378,7 +393,15 @@ var geraltTable = function(options) {
 	api.draw = function(data) {
 		draw(data);
 	};
-	// work only in dataRemote mode
+	
+	/**
+	 * 刷新表格, 去第一页		
+	 * _仅有当 dataRemote模式时, 有效, 否则返回 false_
+	 * @public
+	 * @name  flush
+	 * @function
+	 * @memberof geraltTable.prototype 
+	 */
 	api.flush = function() {
 		if (!dataRemote) return false;
 		api.page.goPage(1);
@@ -389,6 +412,14 @@ var geraltTable = function(options) {
 			}
 		}
 	};
+	/**
+	 * 销毁/删除 表格
+	 * @param  {Function} [callback=null] 当表格已经销毁时的回调, 
+	 * @public
+	 * @name  destory
+	 * @function
+	 * @memberof geraltTable.prototype 
+	 */
 	api.destory = function(callback) {
 		$(selector).empty();
 		if (paging && paging.paginationSelector) {
@@ -398,7 +429,21 @@ var geraltTable = function(options) {
 			callback();
 		}
 	};
-	// 该种table适用于动态添加数据的情况以(DataSource初始化) mergeDs会和现有数据合并,并且可以根据params中的参数选择性的插入位置,默认最前
+	/**
+	 * 该种table适用于动态添加数据的情况以(DataSource初始化) 		
+	 * mergeDs会和现有数据合并,并且可以根据params中的参数选择性的插入位置,默认最前 `head`
+	 * @public
+	 * @name  dynamicUpdate
+	 * @function
+	 * @memberof geraltTable.prototype 
+	 * @param  {Object[]} mergeDs 新加入的 Datasource
+	 * @param  {Object} params  可选参数
+	 * @param { string } [params.position = 'head'] 新数据加入的位置 `head` | `end` 
+	 * @param { int } [params.pNumber = 1 ] 生成表格后显示哪一页
+	 * @param { Function } [params.custMerge = null ] 如何改参数存在, 那么 需要自定义 如何合并, 并且将 结构返回			
+	 * 					`@param { Array[] } dataSource 现在的数据`		
+	 * 					`@return { Array[] } 新的数据`
+	 */
 	api.dynamicUpdate = function(mergeDs, params) {
 		var position = "head",
 			pNumber = 1;
